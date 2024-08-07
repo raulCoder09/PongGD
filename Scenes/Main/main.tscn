@@ -1,0 +1,100 @@
+[gd_scene load_steps=12 format=3 uid="uid://cdqnw8v0o3o02"]
+
+[ext_resource type="Script" path="res://Scenes/Main/GameManager.gd" id="1_5cqvr"]
+[ext_resource type="PackedScene" uid="uid://d34rjccfck3t" path="res://Scenes/PaddleBlue/PaddleBlue.tscn" id="1_gkmuo"]
+[ext_resource type="PackedScene" uid="uid://c5shf1p3q546s" path="res://Scenes/PaddleRed/PaddleRed.tscn" id="2_etg2g"]
+[ext_resource type="PackedScene" uid="uid://l3afsqdf0vhy" path="res://Scenes/Ball/ball.tscn" id="3_tkg7y"]
+[ext_resource type="Texture2D" uid="uid://bvhstpydwiued" path="res://assets/wall-horizontal.png" id="4_l701n"]
+[ext_resource type="Texture2D" uid="uid://8k80bha2vb4l" path="res://assets/wall-vertical.png" id="6_wpr02"]
+[ext_resource type="Texture2D" uid="uid://7qyd433dnw43" path="res://assets/middle-line.png" id="7_s3u0p"]
+[ext_resource type="FontFile" uid="uid://djm6l7vou461i" path="res://assets/alarm clock.ttf" id="8_n68re"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d2t6p"]
+size = Vector2(1187, 21)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k2odb"]
+size = Vector2(20, 616)
+
+[sub_resource type="LabelSettings" id="LabelSettings_k3y72"]
+font = ExtResource("8_n68re")
+font_size = 60
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_5cqvr")
+
+[node name="PaddleBlue" parent="." instance=ExtResource("1_gkmuo")]
+
+[node name="PaddleRed" parent="." instance=ExtResource("2_etg2g")]
+
+[node name="Ball" parent="." instance=ExtResource("3_tkg7y")]
+
+[node name="TopWall" type="StaticBody2D" parent="."]
+position = Vector2(640, 40)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="TopWall"]
+texture = ExtResource("4_l701n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopWall"]
+position = Vector2(-0.5, -0.5)
+shape = SubResource("RectangleShape2D_d2t6p")
+
+[node name="ButtomWall" type="StaticBody2D" parent="."]
+position = Vector2(640, 680)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="ButtomWall"]
+texture = ExtResource("4_l701n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ButtomWall"]
+position = Vector2(-0.5, -0.5)
+shape = SubResource("RectangleShape2D_d2t6p")
+
+[node name="GoalLeft" type="Area2D" parent="."]
+position = Vector2(56, 355)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="GoalLeft"]
+texture = ExtResource("6_wpr02")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GoalLeft"]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_k2odb")
+
+[node name="GoalRight" type="Area2D" parent="."]
+position = Vector2(1224, 355)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="GoalRight"]
+texture = ExtResource("6_wpr02")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GoalRight"]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_k2odb")
+
+[node name="Middle-line" type="Sprite2D" parent="."]
+position = Vector2(640, 360)
+texture = ExtResource("7_s3u0p")
+
+[node name="ScoreBlue" type="Label" parent="."]
+offset_left = 524.0
+offset_top = 66.0
+offset_right = 564.0
+offset_bottom = 130.0
+text = "0"
+label_settings = SubResource("LabelSettings_k3y72")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScoreRed" type="Label" parent="."]
+offset_left = 718.0
+offset_top = 66.0
+offset_right = 758.0
+offset_bottom = 130.0
+text = "0"
+label_settings = SubResource("LabelSettings_k3y72")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="body_entered" from="GoalLeft" to="." method="_on_goal_left_body_entered"]
+[connection signal="body_entered" from="GoalRight" to="." method="_on_goal_right_body_entered"]

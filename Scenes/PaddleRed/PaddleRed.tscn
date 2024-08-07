@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://c5shf1p3q546s"]
+
+[ext_resource type="Script" path="res://Scenes/PaddleRed/PaddleRed.gd" id="1_0352i"]
+[ext_resource type="Texture2D" uid="uid://bm6ur78wsmpf2" path="res://assets/paddle-red.png" id="2_ysin5"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_svtv8"]
+radius = 12.0
+height = 104.0
+
+[node name="PaddleRed" type="CharacterBody2D"]
+position = Vector2(1180, 360)
+script = ExtResource("1_0352i")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-4, 2.08165e-12)
+rotation = 1.5708
+texture = ExtResource("2_ysin5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-4, 0)
+shape = SubResource("CapsuleShape2D_svtv8")
