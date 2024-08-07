@@ -63,6 +63,7 @@ shape = SubResource("RectangleShape2D_k2odb")
 
 [node name="GoalRight" type="Area2D" parent="."]
 position = Vector2(1224, 355)
+scale = Vector2(0.997661, 1)
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="GoalRight"]
